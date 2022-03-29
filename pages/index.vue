@@ -1,31 +1,29 @@
 <template>
   <div>
-    <!-- <TheHeader /> -->
-    <!-- <NuxtLink to="/character">
-      Characters
-    </NuxtLink> -->
-    <!-- <ul> -->
+    <TheHeader />
+
     <ul class="container sm grid grid-cols-4 gap-4">
       <li v-for="character in content" :key="character">
         <div class="card w-96 bg-base-100 shadow-xl">
-          <figure><img :src=" character.thumbnail.path " alt="marvel" /></figure>
+          <figure><img :src=" character.thumbnail.path + '/standard_large.jpg' " alt="marvel"></figure>
           <div class="card-body">
             <h2 class="card-title">
               {{ character.name }}
             </h2>
-            <p>
+            <p v-if=" character.description ">
               {{ character.description }}
             </p>
-            <div class="card-actions justify-end">
-              <button class="btn btn-primary">
-                Buy Now
-              </button>
-            </div>
+            <p v-else>
+              No description found :(
+            </p>
           </div>
         </div>
       </li>
     </ul>
-    <!-- <TheFooter /> -->
+
+    <!-- <CharacterCard /> -->
+
+    <TheFooter />
   </div>
 </template>
 
@@ -44,12 +42,13 @@ async function getCharacters () {
 }
 
 getCharacters()
-// console.log(characters)
 
 export default {
   name: 'IndexPage',
   asyncData () {
-    return { content: characters }
+    return {
+      content: characters
+    }
   }
 }
 </script>
@@ -57,5 +56,12 @@ export default {
 <style>
   .card {
     width: 80%;
+  }
+
+  p {
+    max-width: 50ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 </style>
