@@ -6,6 +6,12 @@ module.exports = {
     "./plugins/**/*.{js,ts}",
     "./nuxt.config.{js,ts}",
   ],
+
+  theme: {
+    container: {
+      center: true
+    }
+  },
   
   plugins: [require('daisyui')],
   

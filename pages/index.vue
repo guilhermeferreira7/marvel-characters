@@ -1,14 +1,31 @@
 <template>
   <div>
-    <NuxtLink to="/character">
+    <!-- <TheHeader /> -->
+    <!-- <NuxtLink to="/character">
       Characters
-    </NuxtLink>
-
-    <ul>
-      <li v-for="(character, index) in characters" :key="index">
-        {{ character }}
+    </NuxtLink> -->
+    <!-- <ul> -->
+    <ul class="container sm grid grid-cols-4 gap-4">
+      <li v-for="character in content" :key="character">
+        <div class="card w-96 bg-base-100 shadow-xl">
+          <figure><img :src=" character.thumbnail.path " alt="marvel" /></figure>
+          <div class="card-body">
+            <h2 class="card-title">
+              {{ character.name }}
+            </h2>
+            <p>
+              {{ character.description }}
+            </p>
+            <div class="card-actions justify-end">
+              <button class="btn btn-primary">
+                Buy Now
+              </button>
+            </div>
+          </div>
+        </div>
       </li>
     </ul>
+    <!-- <TheFooter /> -->
   </div>
 </template>
 
@@ -27,11 +44,18 @@ async function getCharacters () {
 }
 
 getCharacters()
-
-// const charExample = items[0]
-console.log(characters)
+// console.log(characters)
 
 export default {
-  name: 'IndexPage'
+  name: 'IndexPage',
+  asyncData () {
+    return { content: characters }
+  }
 }
 </script>
+
+<style>
+  .card {
+    width: 80%;
+  }
+</style>
