@@ -1,24 +1,44 @@
 <template>
   <div>
-    <ul class="container sm grid grid-cols-4 gap-4">
-      <li v-for="character in content" :key="character">
-        <div class="card w-96 bg-base-100 shadow-xl">
-          <figure><img :src=" character.thumbnail.path " alt="marvel"></figure>
-          <div class="card-body">
-            <h2 class="card-title">
-              {{ character.name }}
-            </h2>
-            <p>
-              {{ character.id }}
-            </p>
-            <div class="card-actions justify-end">
-              <button class="btn btn-primary">
-                More info
-              </button>
-            </div>
-          </div>
-        </div>
-      </li>
-    </ul>
+    <!-- <div>{{ characterItem }}</div> -->
+    <div class="card w-96 bg-base-100 shadow-xl">
+      <figure><img :src=" characterItem.thumbnail.path + '/standard_large.jpg' " alt="marvel"></figure>
+      <div class="card-body">
+        <h2 class="card-title">
+          {{ characterItem.name }}
+        </h2>
+        <p v-if=" characterItem.description ">
+          {{ characterItem.description }}
+        </p>
+        <p v-else>
+          No description found :(
+        </p>
+      </div>
+    </div>
   </div>
 </template>
+
+<script>
+
+export default {
+  props: {
+    characterItem: {
+      type: Object,
+      default: () => {}
+    }
+  }
+}
+</script>
+
+<style scoped>
+  .card {
+    width: 80%;
+  }
+
+  p {
+    max-width: 50ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
