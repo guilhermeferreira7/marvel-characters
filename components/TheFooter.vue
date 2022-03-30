@@ -1,6 +1,6 @@
 <template>
   <div>
-    <footer class="footer footer-center p-4 bg-base-300 text-base-content">
+    <footer class="footer footer-center p-4 bg-red-500 text-base-content">
       <div>
         <p>Data provided by Marvel Comics API</p>
       </div>

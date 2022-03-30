@@ -1,8 +1,7 @@
 <template>
   <div>
-    <!-- <div>{{ characterItem }}</div> -->
-    <div class="card w-96 bg-base-100 shadow-xl">
-      <figure><img :src=" characterItem.thumbnail.path + '/standard_large.jpg' " alt="marvel"></figure>
+    <div class="card w-96 shadow-xl">
+      <figure><img :src=" `${characterItem.thumbnail.path}/landscape_medium.${characterItem.thumbnail.extension}` " alt="marvel"></figure>
       <div class="card-body">
         <h2 class="card-title">
           {{ characterItem.name }}
@@ -13,6 +12,13 @@
         <p v-else>
           No description found :(
         </p>
+        <div class="card-actions justify-end">
+          <NuxtLink :to=" `/characters/${characterItem.id}` ">
+            <button class="btn bg-red-500">
+              More info
+            </button>
+          </NuxtLink>
+        </div>
       </div>
     </div>
   </div>
@@ -27,18 +33,25 @@ export default {
       default: () => {}
     }
   }
+
 }
 </script>
 
 <style scoped>
   .card {
-    width: 80%;
+    width: 92%;
+    margin: 20px 0;
+    min-height: 340px;
   }
 
   p {
-    max-width: 50ch;
+    max-width: 30ch;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  button {
+    border: none;
   }
 </style>
