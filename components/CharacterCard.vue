@@ -13,7 +13,7 @@
           No description found :(
         </p>
         <div class="card-actions justify-end">
-          <NuxtLink :to=" `/characters/${characterItem.id}` ">
+          <NuxtLink :to=" `/character/${characterItem.id}` ">
             <button class="btn bg-red-500">
               More info
             </button>
@@ -40,7 +40,7 @@ export default {
 <style scoped>
   .card {
     width: 92%;
-    margin: 20px 0;
+    margin: 20px 20px 0 20px;
     min-height: 340px;
   }
 
