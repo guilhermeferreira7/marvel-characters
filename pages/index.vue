@@ -13,24 +13,28 @@
 <script>
 import axios from 'axios'
 const PUBLIC_KEY = 'd3de654e788ba3ee07a6a7063415efd9'
-const apiData = []
-
-//  total characters = 1600
-async function getCharacters () {
-  await axios.get(`http://gateway.marvel.com/v1/public/characters?orderBy=name&limit=6&offset=1200&apikey=${PUBLIC_KEY}`).then((result) => {
-    result.data.data.results.forEach((item) => {
-      apiData.push(item)
-    })
-  })
-}
-getCharacters()
 
 export default {
   name: 'IndexPage',
-  asyncData () {
-    return {
-      characters: apiData
-    }
+  async fetch () {
+    const offset = this.$route.query && this.$route.query.page ? this.$route.query.page * 6 : 0
+
+    this.characters = await axios.get('http://gateway.marvel.com/v1/public/characters', {
+      params: {
+        orderBy: 'name',
+        limit: 6,
+        offset,
+        apikey: PUBLIC_KEY
+      }
+    }).then((result) => {
+      return result.data.data.results
+    })
+  },
+  data () {
+    return { characters: [] }
+  },
+  watch: {
+    '$route.query': '$fetch'
   }
 }
 </script>

@@ -9,19 +9,19 @@
 
       <div class="container">
         <div class="btn-group place-content-center">
-          <button class="btn btn-disabled">
+          <button class="btn" @click="changePage(1)">
             1
           </button>
-          <button class="btn">
+          <button class="btn" @click="changePage(2)">
             2
           </button>
-          <button class="btn">
+          <button class="btn" @click="changePage(3)">
             3
           </button>
-          <button class="btn">
+          <button class="btn" @click="changePage(4)">
             4
           </button>
-          <button class="btn">
+          <button class="btn" @click="changePage(5)">
             5
           </button>
         </div>
@@ -40,6 +40,11 @@ export default {
     charactersList: {
       type: Object,
       default: () => {}
+    }
+  },
+  methods: {
+    changePage (page) {
+      this.$router.replace({ query: { page } })
     }
   }
 }
