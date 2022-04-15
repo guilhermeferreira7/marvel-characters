@@ -3,7 +3,7 @@
     <TheHeader />
 
     <main>
-      <CharactersList :characters-list=" characters " />
+      <CharactersList :characters-list=" characters " :pagination=" pagination " />
     </main>
 
     <TheFooter />
@@ -17,7 +17,11 @@ const PUBLIC_KEY = 'd3de654e788ba3ee07a6a7063415efd9'
 export default {
   name: 'IndexPage',
   async fetch () {
-    const offset = this.$route.query && this.$route.query.page ? this.$route.query.page * 6 : 0
+    const offset = this.$route.query && this.$route.query.page ? (this.$route.query.page * 6) - 6 : 0
+
+    this.pagination = {
+      lastPage: 20
+    }
 
     this.characters = await axios.get('http://gateway.marvel.com/v1/public/characters', {
       params: {
@@ -31,7 +35,10 @@ export default {
     })
   },
   data () {
-    return { characters: [] }
+    return {
+      characters: [],
+      pagination: {}
+    }
   },
   watch: {
     '$route.query': '$fetch'

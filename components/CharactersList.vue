@@ -10,26 +10,23 @@
       <div class="container">
         <div class="btn-group place-content-center">
           <button class="btn" @click="changePage(1)">
-            1
+            First page
           </button>
-          <button class="btn" @click="changePage(2)">
-            2
+          <button class="btn" @click="prevPage()">
+            «
           </button>
-          <button class="btn" @click="changePage(3)">
-            3
+          <button class="btn">
+            Page {{ currentPage }}
           </button>
-          <button class="btn" @click="changePage(4)">
-            4
+          <button class="btn" @click="nextPage()">
+            »
           </button>
-          <button class="btn" @click="changePage(5)">
-            5
+          <button class="btn" @click="changePage(pagination.lastPage)">
+            Last page
           </button>
         </div>
       </div>
-
-      <!-- <NuxtLink :to="`/page/2`">
-        <button class="btn center">Prox pagina</button>
-      </NuxtLink> -->
+      
     </main>
   </div>
 </template>
@@ -38,13 +35,33 @@
 export default {
   props: {
     charactersList: {
+      type: Array,
+      default: () => {}
+    },
+    pagination: {
       type: Object,
       default: () => {}
     }
   },
   methods: {
-    changePage (page) {
+    nextPage () {
+      this.currentPage++
+      const page = this.currentPage
       this.$router.replace({ query: { page } })
+    },
+    prevPage () {
+      this.currentPage--
+      const page = this.currentPage
+      this.$router.replace({ query: { page } })
+    },
+    changePage (page) {
+      this.currentPage = page
+      this.$router.replace({ query: { page } })
+    }
+  },
+  data () {
+    return {
+      currentPage: 1
     }
   }
 }
