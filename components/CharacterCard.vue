@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="card w-96 shadow-xl">
+    <div class="card w-96 shadow-xl bg-red-300 text-black">
       <figure><img :src=" `${characterItem.thumbnail.path}/landscape_medium.${characterItem.thumbnail.extension}` " alt="marvel"></figure>
       <div class="card-body">
         <h2 class="card-title">
@@ -14,7 +14,7 @@
         </p>
         <div class="card-actions justify-end">
           <NuxtLink :to=" `/character/${characterItem.id}`  ">
-            <button class="btn bg-red-500">
+            <button class="btn bg-red-500 text-black">
               More info
             </button>
           </NuxtLink>

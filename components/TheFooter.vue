@@ -7,10 +7,3 @@
     </footer>
   </div>
 </template>
-
-<style scoped>
-  .footer {
-    position:absolute;
-    bottom:0;
-  }
-</style>

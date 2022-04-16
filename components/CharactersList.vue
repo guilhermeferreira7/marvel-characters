@@ -1,7 +1,7 @@
 <template>
   <div>
     <main>
-      <ul class="container sm grid grid-cols-6">
+      <ul class="container sm grid grid-cols-2 lg:grid-cols-6">
         <li v-for="character in charactersList" :key="character">
           <CharacterCard :character-item=" character " />
         </li>
@@ -9,24 +9,24 @@
 
       <div class="container">
         <div class="btn-group place-content-center">
-          <button class="btn" @click="changePage(1)">
+          <button class="btn " :class=" currentPage == '1' ? 'btn-disabled' : ''  " @click="changePage(1)">
             First page
           </button>
-          <button class="btn" @click="prevPage()">
+          <button class="btn" :class=" currentPage == '1' ? 'btn-disabled' : '' " @click="changePage(currentPage - 1)">
             «
           </button>
           <button class="btn">
             Page {{ currentPage }}
           </button>
-          <button class="btn" @click="nextPage()">
+          <button class="btn" :class=" currentPage == pagination.lastPage ? 'btn-disabled' : '' " @click="changePage(currentPage + 1)">
             »
           </button>
-          <button class="btn" @click="changePage(pagination.lastPage)">
+          <button class="btn" :class=" currentPage == pagination.lastPage ? 'btn-disabled' : '' " @click="changePage(pagination.lastPage)">
             Last page
           </button>
         </div>
       </div>
-      
+
     </main>
   </div>
 </template>
@@ -44,16 +44,6 @@ export default {
     }
   },
   methods: {
-    nextPage () {
-      this.currentPage++
-      const page = this.currentPage
-      this.$router.replace({ query: { page } })
-    },
-    prevPage () {
-      this.currentPage--
-      const page = this.currentPage
-      this.$router.replace({ query: { page } })
-    },
     changePage (page) {
       this.currentPage = page
       this.$router.replace({ query: { page } })

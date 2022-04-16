@@ -1,27 +1,29 @@
 <template>
-  <div class="navbar bg-red-500">
-    <div class="flex-1">
-      <NuxtLink to="/" class="btn btn-ghost uppercase text-xl text-white">
-        Marvel Characters
-      </NuxtLink>
-    </div>
-    <div class="flex-none gap-2">
-      <div class="form-control">
-        <input
-          v-model="search"
-          type="text"
-          placeholder="Search characters"
-          class="input input-bordered"
-          @input="handleInput"
-        >
+  <div>
+    <div class="navbar bg-red-500 grid md:grid-cols-2">
+      <div class="">
+        <NuxtLink to="/" class="btn btn-ghost uppercase text-xl text-white">
+          Marvel Characters
+        </NuxtLink>
       </div>
-      <ul v-if=" searchQuery ">
-        <li v-for="character in searchQuery" :key="character">
-         <NuxtLink :to=" `/character/${character.id}` ">
-            {{ character.name }}
-         </NuxtLink>
-        </li>
-      </ul>
+      <div class="float-right">
+        <div class="form-control">
+          <input
+            v-model="search"
+            type="text"
+            placeholder="Search characters"
+            class="input input-bordered"
+            @input="handleInput"
+          >
+        </div>
+        <ul class="text-black divide-y z-10 bg-white search-box" v-if=" searchQuery ">
+          <li v-for="character in searchQuery" :key="character">
+            <NuxtLink :to=" `/character/${character.id}` ">
+              {{ character.name }}
+            </NuxtLink>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -61,5 +63,10 @@ export default {
 <style scoped>
   .navbar {
     padding: 40px;
+  }
+
+  .search-box {
+    position: absolute;
+    top: 10;
   }
 </style>

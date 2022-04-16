@@ -20,7 +20,7 @@ export default {
     const offset = this.$route.query && this.$route.query.page ? (this.$route.query.page * 6) - 6 : 0
 
     this.pagination = {
-      lastPage: 20
+      lastPage: 261
     }
 
     this.characters = await axios.get('http://gateway.marvel.com/v1/public/characters', {

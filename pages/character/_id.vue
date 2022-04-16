@@ -3,9 +3,19 @@
     <TheHeader />
     <main>
       <div>
-        {{ character.name }}
-        {{ character.description }}
+        <ul>
+          <li v-for="comic in comics" :key="comic">
+            {{ comic.title }}
+            <figure>
+            <img
+              :src=" `${comic.images[0].path}/landscape_medium.${comic.images[0].extension}` "
+              alt="marvel character"
+            >
+            </figure>
+          </li>
+        </ul>
       </div>
+
     </main>
     <TheFooter />
   </div>
@@ -26,10 +36,21 @@ export default {
     }).then((result) => {
       return result.data.data.results[0]
     })
+
+    this.comics = await axios.get(`http://gateway.marvel.com/v1/public/characters/${id}/comics`, {
+      params: {
+        apikey: PUBLIC_KEY,
+        limit: 3
+      }
+    }).then((result) => {
+      return result.data.data.results
+    })
   },
+
   data () {
     return {
-      character: []
+      character: [],
+      comics: []
     }
   }
 }
