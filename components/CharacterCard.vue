@@ -13,7 +13,7 @@
           No description found :(
         </p>
         <div class="card-actions justify-end">
-          <NuxtLink :to=" `/character/${characterItem.id}` ">
+          <NuxtLink :to=" `/character/${characterItem.id}`  ">
             <button class="btn bg-red-500">
               More info
             </button>

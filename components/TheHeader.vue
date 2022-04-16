@@ -32,7 +32,10 @@ const PUBLIC_KEY = 'd3de654e788ba3ee07a6a7063415efd9'
 
 export default {
   methods: {
-    async handleInput () {
+    handleInput () {
+      this.searchCharacters()
+    },
+    async searchCharacters () {
       if (this.searchQuery) {
         this.searchQuery = await axios.get('http://gateway.marvel.com/v1/public/characters', {
           params: {
@@ -44,7 +47,6 @@ export default {
         }).then((result) => {
           return result.data.data.results
         })
-        console.log(this.searchQuery)
       }
     }
   },
