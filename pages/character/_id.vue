@@ -1,23 +1,24 @@
 <template>
   <div>
-    <TheHeader />
+    <HeaderPage />
+
     <main>
       <div>
         <ul>
           <li v-for="comic in comics" :key="comic">
             {{ comic.title }}
             <figure>
-            <img
-              :src=" `${comic.images[0].path}/landscape_medium.${comic.images[0].extension}` "
-              alt="marvel character"
-            >
+              <img
+                :src=" `${comic.images[0].path}/landscape_medium.${comic.images[0].extension}` "
+                alt="marvel character"
+              >
             </figure>
           </li>
         </ul>
       </div>
-
     </main>
-    <TheFooter />
+
+    <FooterPage />
   </div>
 </template>
 
@@ -26,6 +27,13 @@ import axios from 'axios'
 const PUBLIC_KEY = 'd3de654e788ba3ee07a6a7063415efd9'
 
 export default {
+  data () {
+    return {
+      character: [],
+      comics: []
+    }
+  },
+
   async fetch () {
     const id = this.$route.params.id
     this.character = await axios.get('http://gateway.marvel.com/v1/public/characters', {
@@ -45,13 +53,6 @@ export default {
     }).then((result) => {
       return result.data.data.results
     })
-  },
-
-  data () {
-    return {
-      character: [],
-      comics: []
-    }
   }
 }
 

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <TheHeader />
+    <HeaderPage />
 
     <main>
       <CharactersList :characters-list=" characters " :pagination=" pagination " />
     </main>
 
-    <TheFooter />
+    <FooterPage />
   </div>
 </template>
 
@@ -16,6 +16,14 @@ const PUBLIC_KEY = 'd3de654e788ba3ee07a6a7063415efd9'
 
 export default {
   name: 'IndexPage',
+
+  data () {
+    return {
+      characters: [],
+      pagination: {}
+    }
+  },
+
   async fetch () {
     const offset = this.$route.query && this.$route.query.page ? (this.$route.query.page * 6) - 6 : 0
 
@@ -34,12 +42,7 @@ export default {
       return result.data.data.results
     })
   },
-  data () {
-    return {
-      characters: [],
-      pagination: {}
-    }
-  },
+
   watch: {
     '$route.query': '$fetch'
   }
