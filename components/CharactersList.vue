@@ -9,24 +9,23 @@
 
       <div class="container">
         <div class="btn-group place-content-center">
-          <button class="btn " :class=" currentPage == '1' ? 'btn-disabled' : ''  " @click="changePage(1)">
+          <button class="btn bg-red-500 text-white" :class=" currentPage == '1' ? 'bg-red-400 btn-disabled' : '' " @click="changePage(1)">
             First page
           </button>
-          <button class="btn" :class=" currentPage == '1' ? 'btn-disabled' : '' " @click="changePage(currentPage - 1)">
+          <button class="btn bg-red-500 text-white" :class=" currentPage == '1' ? 'bg-red-400 btn-disabled' : '' " @click="changePage(currentPage - 1)">
             «
           </button>
-          <button class="btn">
+          <button class="btn btn-disabled bg-red-400 text-white">
             Page {{ currentPage }}
           </button>
-          <button class="btn" :class=" currentPage == pagination.lastPage ? 'btn-disabled' : '' " @click="changePage(currentPage + 1)">
+          <button class="btn bg-red-500 text-white" :class=" currentPage == pagination.lastPage ? 'bg-red-400 btn-disabled' : '' " @click="changePage(currentPage + 1)">
             »
           </button>
-          <button class="btn" :class=" currentPage == pagination.lastPage ? 'btn-disabled' : '' " @click="changePage(pagination.lastPage)">
+          <button class="btn bg-red-500 text-white" :class=" currentPage == pagination.lastPage ? 'bg-red-400 btn-disabled' : '' " @click="changePage(pagination.lastPage)">
             Last page
           </button>
         </div>
       </div>
-
     </main>
   </div>
 </template>
@@ -43,15 +42,15 @@ export default {
       default: () => {}
     }
   },
+  data () {
+    return {
+      currentPage: 1
+    }
+  },
   methods: {
     changePage (page) {
       this.currentPage = page
       this.$router.replace({ query: { page } })
-    }
-  },
-  data () {
-    return {
-      currentPage: 1
     }
   }
 }

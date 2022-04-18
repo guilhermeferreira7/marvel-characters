@@ -3,6 +3,8 @@
     <HeaderPage />
 
     <main>
+      <PageTitle title="All Characters" />
+
       <CharactersList :characters-list=" characters " :pagination=" pagination " />
     </main>
 
@@ -48,3 +50,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  main {
+    min-height: 530px;
+  }
+</style>

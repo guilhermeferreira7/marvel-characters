@@ -13,7 +13,7 @@
             v-model="search"
             type="text"
             placeholder="Search characters"
-            class="input input-bordered"
+            class="input input-bordered bg-red-400 text-white"
             @input="handleInput"
           >
         </div>
@@ -24,7 +24,6 @@
             </NuxtLink>
           </li>
         </ul>
-
       </div>
     </header>
   </div>
@@ -37,7 +36,8 @@ const PUBLIC_KEY = 'd3de654e788ba3ee07a6a7063415efd9'
 export default {
   data () {
     return {
-      searchQuery: []
+      searchQuery: [],
+      search: ''
     }
   },
 
@@ -50,7 +50,7 @@ export default {
       this.searchQuery = await axios.get('http://gateway.marvel.com/v1/public/characters', {
         params: {
           orderBy: 'name',
-          limit: 100,
+          limit: 15,
           nameStartsWith: this.search,
           apikey: PUBLIC_KEY
         }
@@ -64,7 +64,7 @@ export default {
 
 <style scoped>
   .navbar {
-    padding: 40px;
+    padding: 10px;
   }
 
   .search-box {
@@ -72,6 +72,10 @@ export default {
     top: 85px;
     max-height: 300px;
     width: 195px;
+  }
+
+  ::placeholder {
+    color: white;
   }
 
 </style>
