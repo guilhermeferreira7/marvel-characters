@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
-    "core-js": "^3.19.3",
+    "core-js": "^3.22.0",
     "daisyui": "^2.13.6",
     "nuxt": "^2.15.8",
     "nuxt-global-var": "^1.0.2",
