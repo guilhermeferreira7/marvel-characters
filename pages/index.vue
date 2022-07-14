@@ -5,54 +5,58 @@
     <main>
       <PageTitle title="All Characters" />
 
-      <CharactersList :characters-list=" characters " :pagination=" pagination " />
+      <CharactersList :characters-list="characters" :pagination="pagination" />
     </main>
-
-    <FooterPage />
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-const PUBLIC_KEY = 'd3de654e788ba3ee07a6a7063415efd9'
+import axios from "axios";
+const PUBLIC_KEY = "d3de654e788ba3ee07a6a7063415efd9";
+const limit = 4;
 
 export default {
-  name: 'IndexPage',
+  name: "IndexPage",
 
-  data () {
+  head() {
     return {
-      characters: [],
-      pagination: {}
-    }
+      title: "Marvel characters",
+    };
   },
 
-  async fetch () {
-    const offset = this.$route.query && this.$route.query.page ? (this.$route.query.page * 6) - 6 : 0
+  data() {
+    return {
+      characters: [],
+      pagination: {},
+    };
+  },
+
+  async fetch() {
+    const offset =
+      this.$route.query && this.$route.query.page
+        ? this.$route.query.page * limit - limit
+        : 0;
 
     this.pagination = {
-      lastPage: 261
-    }
+      lastPage: 300,
+    };
 
-    this.characters = await axios.get('http://gateway.marvel.com/v1/public/characters', {
-      params: {
-        orderBy: 'name',
-        limit: 6,
-        offset,
-        apikey: PUBLIC_KEY
-      }
-    }).then((result) => {
-      return result.data.data.results
-    })
+    this.characters = await axios
+      .get("http://gateway.marvel.com/v1/public/characters", {
+        params: {
+          orderBy: "name",
+          limit,
+          offset,
+          apikey: PUBLIC_KEY,
+        },
+      })
+      .then((result) => {
+        return result.data.data.results;
+      });
   },
 
   watch: {
-    '$route.query': '$fetch'
-  }
-}
+    "$route.query": "$fetch",
+  },
+};
 </script>
-
-<style scoped>
-  main {
-    min-height: 530px;
-  }
-</style>

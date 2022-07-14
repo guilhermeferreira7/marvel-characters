@@ -1,27 +1,51 @@
 <template>
   <div>
     <main>
-      <ul class="container sm grid grid-cols-2 lg:grid-cols-6">
+      <ul class="container grid sm:grid-cols-2 md:grid-cols-4">
         <li v-for="character in charactersList" :key="character">
-          <CharacterCard :character-item=" character " />
+          <CharacterCard :character-item="character" />
         </li>
       </ul>
 
       <div class="container">
         <div class="btn-group place-content-center">
-          <button class="btn bg-red-500 text-white" :class=" currentPage == '1' ? 'bg-red-400 btn-disabled' : '' " @click="changePage(1)">
+          <button
+            class="btn bg-red-500 text-white"
+            :class="currentPage == '1' ? 'bg-red-400 btn-disabled' : ''"
+            @click="changePage(1)"
+          >
             First page
           </button>
-          <button class="btn bg-red-500 text-white" :class=" currentPage == '1' ? 'bg-red-400 btn-disabled' : '' " @click="changePage(currentPage - 1)">
+          <button
+            class="btn bg-red-500 text-white"
+            :class="currentPage == '1' ? 'bg-red-400 btn-disabled' : ''"
+            @click="changePage(currentPage - 1)"
+          >
             «
           </button>
           <button class="btn btn-disabled bg-red-400 text-white">
             Page {{ currentPage }}
           </button>
-          <button class="btn bg-red-500 text-white" :class=" currentPage == pagination.lastPage ? 'bg-red-400 btn-disabled' : '' " @click="changePage(currentPage + 1)">
+          <button
+            class="btn bg-red-500 text-white"
+            :class="
+              currentPage == pagination.lastPage
+                ? 'bg-red-400 btn-disabled'
+                : ''
+            "
+            @click="changePage(currentPage + 1)"
+          >
             »
           </button>
-          <button class="btn bg-red-500 text-white" :class=" currentPage == pagination.lastPage ? 'bg-red-400 btn-disabled' : '' " @click="changePage(pagination.lastPage)">
+          <button
+            class="btn bg-red-500 text-white"
+            :class="
+              currentPage == pagination.lastPage
+                ? 'bg-red-400 btn-disabled'
+                : ''
+            "
+            @click="changePage(pagination.lastPage)"
+          >
             Last page
           </button>
         </div>
@@ -35,29 +59,33 @@ export default {
   props: {
     charactersList: {
       type: Array,
-      default: () => {}
+      default: () => {},
     },
     pagination: {
       type: Object,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
-  data () {
+  data() {
     return {
-      currentPage: 1
-    }
+      currentPage: 1,
+    };
   },
   methods: {
-    changePage (page) {
-      this.currentPage = page
-      this.$router.replace({ query: { page } })
-    }
-  }
-}
+    changePage(page) {
+      this.currentPage = page;
+      this.$router.replace({ query: { page } });
+    },
+  },
+};
 </script>
 
 <style scoped>
-  .btn-group {
-    margin: 10px 0;
-  }
+.btn-group {
+  margin: 20px 0;
+}
+
+.btn {
+  border: none;
+}
 </style>

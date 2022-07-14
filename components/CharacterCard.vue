@@ -1,57 +1,58 @@
 <template>
   <div>
-    <div class="card w-96 shadow-xl bg-red-300 text-black">
-      <figure><img :src=" `${characterItem.thumbnail.path}/landscape_medium.${characterItem.thumbnail.extension}` " alt="marvel"></figure>
-      <div class="card-body">
-        <h2 class="card-title">
-          {{ characterItem.name }}
-        </h2>
-        <p v-if=" characterItem.description ">
-          {{ characterItem.description }}
-        </p>
-        <p v-else>
-          No description found :(
-        </p>
-        <div class="card-actions justify-end">
-          <NuxtLink :to=" `/character/${characterItem.id}` ">
-            <button class="btn bg-red-500 text-white">
-              More info
-            </button>
-          </NuxtLink>
+    <div class="card w-96 shadow-xl text-black">
+      <NuxtLink :to="`/character/${characterItem.id}`">
+        <figure>
+          <img
+            :src="`${characterItem.thumbnail.path}/landscape_medium.${characterItem.thumbnail.extension}`"
+            alt="marvel"
+          />
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">
+            {{ characterItem.name }}
+          </h2>
+          <p v-if="characterItem.description">
+            {{ characterItem.description }}
+          </p>
+          <p v-else>No description found :(</p>
         </div>
-      </div>
+      </NuxtLink>
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   props: {
     characterItem: {
       type: Object,
-      default: () => {}
-    }
-  }
-
-}
+      default: () => {},
+    },
+  },
+};
 </script>
 
 <style scoped>
-  .card {
-    width: 92%;
-    margin: 20px 20px 0 20px;
-    min-height: 340px;
-  }
+.card:hover {
+  background-color: rgb(224, 149, 149);
+}
 
-  p {
-    max-width: 30ch;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+.card {
+  width: 92%;
+  margin: 20px 20px 0 20px;
+  min-height: 350px;
+}
 
-  button {
-    border: none;
-  }
+p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+button {
+  border: none;
+}
 </style>

@@ -13,18 +13,18 @@ export default {
   props: {
     title: {
       type: String,
-      default: ''
-    }
-  }
-}
+      default: "",
+    },
+  },
+};
 </script>
 
 <style scoped>
-  #title h1 {
-    font-size: 28px;
-  }
+#title h1 {
+  font-size: 28px;
+}
 
-  #title {
-    margin-top: 10px;
-  }
+#title {
+  margin: 10px 0;
+}
 </style>
